@@ -1,7 +1,7 @@
-#include <cstring>  //for c style string operations needed in few parts
+
 #include <iostream> //for standard io
 #include <netinet/in.h> //Defines the sockaddr_in structure and internet address constants
-#include <sstream>      //for http parsing
+
 #include <string>       //for using string instead of c style char*
 #include <sys/socket.h> //for functions of socket
 #include <unistd.h>     //for open, write, close etc.
@@ -34,19 +34,20 @@
 //
 
 class server {
+private:
+  int sock_fd = -1; // file descriptor for server socket
 public:
   // our port where the server will listen
   std::string port;
   // constructor for defining out port
   server(std::string port) { this->port = port; };
   int start() {
-    int sock_fd;                    // file descriptor for server socket
     struct sockaddr_in server_addr; // this is the structure we would use to
                                     // store our server's address
-    sock_fd = socket(
-        AF_INET, SOCK_STREAM.0); // we will use ipv4, used SOCK_STREAM for TCP,
-                                 // also used 0 in the protocol field so that
-                                 // best protocol is automatically chosen
+    sock_fd = socket(AF_INET, SOCK_STREAM,
+                     0); // we will use ipv4, used SOCK_STREAM for TCP,
+                         // also used 0 in the protocol field so that
+                         // best protocol is automatically chosen
     //  On success, a file descriptor for the new socket is returned.  On error,
     //  -1 is returned, and errno is set to indicate the error.
     // checking for any error
@@ -66,9 +67,24 @@ public:
       std::cerr << "Can't listen on socket";
       exit(1);
     }
-    std::cout << "Listening on port" << port << endl;
+    std::cout << "Listening on port" << port << std::endl;
+    return 0;
   };
-  int close() { return 0; }
-};
+  int stop() {
+    if (sock_fd >= 0) {
+      std::cout << "Closing the server....\n";
+      close(sock_fd);
+      sock_fd = -1;
+    }
+    return 0;
+  };
+  ~server() {
+    std::cout << "Shutting down HTTP server...\n";
 
-int main() {}
+    if (sock_fd >= 0) {
+      std::cout << "Closing the server....\n";
+      close(sock_fd);
+      sock_fd = -1;
+    }
+  }
+};
