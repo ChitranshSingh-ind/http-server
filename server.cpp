@@ -1,4 +1,5 @@
 
+#include <asm-generic/socket.h>
 #include <iostream> //for standard io
 #include <netinet/in.h> //Defines the sockaddr_in structure and internet address constants
 
@@ -35,9 +36,10 @@
 
 class server {
 private:
-  int sock_fd = -1; // file descriptor for server socket
 public:
   // our port where the server will listen
+
+  int sock_fd = -1; // file descriptor for server socket
   std::string port;
   // constructor for defining out port
   server(std::string port) { this->port = port; };
@@ -55,8 +57,10 @@ public:
       std::cerr << "Failed to initialise the socket";
       exit(1);
     }
+    int opt = 1;
+    setsockopt(sock_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
     server_addr.sin_family = AF_INET;
-    server_addr.sin_port = (std::stoi(port));
+    server_addr.sin_port = htons(std::stoi(port));
     server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     if (bind(sock_fd, (struct sockaddr *)&server_addr, sizeof(server_addr)) <
         0) {

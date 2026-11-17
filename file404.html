@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 - Page Not Found</title>
+  <style>
+    /* Reset and base styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f4f6f9;
+      color: #1f2937;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Main error card */
+    .error-container {
+      background: #ffffff;
+      max-width: 500px;
+      width: 100%;
+      padding: 48px 36px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+      text-align: center;
+    }
+
+    /* Large 404 heading with gradient text */
+    .error-code {
+      font-size: 6rem;
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(135deg, #4f46e5, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+    }
+
+    .error-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 12px;
+    }
+
+    .error-message {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #6b7280;
+      margin-bottom: 32px;
+    }
+
+    /* Action buttons */
+    .actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .btn-primary {
+      background-color: #4f46e5;
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: #4338ca;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background-color: #f3f4f6;
+      color: #374151;
+    }
+
+    .btn-secondary:hover {
+      background-color: #e5e7eb;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <main class="error-container">
+    <div class="error-code">404</div>
+    <h1 class="error-title">Page not found</h1>
+    <p class="error-message">
+      Sorry, we couldn’t find the page you’re looking for. It may have been moved, deleted, or the link might be broken.
+    </p>
+    <div class="actions">
+      <a href="/" class="btn btn-primary">Go Back Home</a>
+      <a href="javascript:history.back()" class="btn btn-secondary">Previous Page</a>
+    </div>
+  </main>
+</body>
+</html>
